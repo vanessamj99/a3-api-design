@@ -1,0 +1,5 @@
+synatx = "proto3"
+
+message User {
+    string userID = 1;
+}
