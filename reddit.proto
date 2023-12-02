@@ -1,0 +1,24 @@
+synatx = "proto3"
+
+message User {
+    string userID = 1;
+}
+
+message Post {
+    string postID = 1;
+    string title = 2;
+    string text = 3;
+    string mediaUrl = 4;
+    string score = 5;
+    string state = 6;
+    string publicationDate = 7;
+    User author = 8;
+}
+
+message Comment {
+    string commentID = 1;
+    User author = 2;
+    string score = 3;
+    string state = 4;
+    string publicationDate = 5;
+}

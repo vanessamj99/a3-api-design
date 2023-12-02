@@ -1,9 +1,0 @@
-synatx = "proto3"
-
-message Comment {
-    string commentID = 1;
-    string author = 2;
-    string score = 3;
-    string state = 4;
-    string publicationDate = 5;
-}
