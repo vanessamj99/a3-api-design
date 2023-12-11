@@ -29,7 +29,7 @@ message Comment {
 }
 
 message N {
-    int number; 
+    int number = 1;
 }
 
 service Reddit {
