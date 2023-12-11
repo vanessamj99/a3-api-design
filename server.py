@@ -48,8 +48,9 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
         )
            
    def UpVote(self, request, context):
-       print(type(request))
-       print(type(request) == "<class 'reddit_pb2.Post'>")
+       post_type =  reddit_pb2.Post()
+       comment_type = reddit_pb2.Comment()
+       print(type(request) == post_type)
        request.upVote += 1
        return request
    def DownVote(self, request, context):
