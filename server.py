@@ -48,8 +48,8 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
         )
            
    def UpVote(self, request, context):
-       post_type =  reddit_pb2.Post()
-       comment_type = reddit_pb2.Comment()
+       post_type =  reddit_pb2.Post
+       comment_type = reddit_pb2.Comment
        print(type(request) == post_type)
        request.upVote += 1
        return request
