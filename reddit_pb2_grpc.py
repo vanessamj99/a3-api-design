@@ -39,15 +39,20 @@ class RedditStub(object):
                 request_serializer=reddit__pb2.Comment.SerializeToString,
                 response_deserializer=reddit__pb2.Comment.FromString,
                 )
-        self.RetrieveListOfNMostUpvotedComments = channel.unary_unary(
+        self.RetrieveListOfNMostUpvotedComments = channel.unary_stream(
                 '/Reddit/RetrieveListOfNMostUpvotedComments',
-                request_serializer=reddit__pb2.Post.SerializeToString,
+                request_serializer=reddit__pb2.TopN.SerializeToString,
                 response_deserializer=reddit__pb2.Comment.FromString,
                 )
         self.ExpandCommentBranch = channel.unary_unary(
                 '/Reddit/ExpandCommentBranch',
                 request_serializer=reddit__pb2.Comment.SerializeToString,
                 response_deserializer=reddit__pb2.Comment.FromString,
+                )
+        self.Update = channel.unary_unary(
+                '/Reddit/Update',
+                request_serializer=reddit__pb2.Post.SerializeToString,
+                response_deserializer=reddit__pb2.Post.FromString,
                 )
 
 
@@ -96,6 +101,13 @@ class RedditServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Update(self, request, context):
+        """extra credit:
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_RedditServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -124,15 +136,20 @@ def add_RedditServicer_to_server(servicer, server):
                     request_deserializer=reddit__pb2.Comment.FromString,
                     response_serializer=reddit__pb2.Comment.SerializeToString,
             ),
-            'RetrieveListOfNMostUpvotedComments': grpc.unary_unary_rpc_method_handler(
+            'RetrieveListOfNMostUpvotedComments': grpc.unary_stream_rpc_method_handler(
                     servicer.RetrieveListOfNMostUpvotedComments,
-                    request_deserializer=reddit__pb2.Post.FromString,
+                    request_deserializer=reddit__pb2.TopN.FromString,
                     response_serializer=reddit__pb2.Comment.SerializeToString,
             ),
             'ExpandCommentBranch': grpc.unary_unary_rpc_method_handler(
                     servicer.ExpandCommentBranch,
                     request_deserializer=reddit__pb2.Comment.FromString,
                     response_serializer=reddit__pb2.Comment.SerializeToString,
+            ),
+            'Update': grpc.unary_unary_rpc_method_handler(
+                    servicer.Update,
+                    request_deserializer=reddit__pb2.Post.FromString,
+                    response_serializer=reddit__pb2.Post.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -240,8 +257,8 @@ class Reddit(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Reddit/RetrieveListOfNMostUpvotedComments',
-            reddit__pb2.Post.SerializeToString,
+        return grpc.experimental.unary_stream(request, target, '/Reddit/RetrieveListOfNMostUpvotedComments',
+            reddit__pb2.TopN.SerializeToString,
             reddit__pb2.Comment.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -260,5 +277,22 @@ class Reddit(object):
         return grpc.experimental.unary_unary(request, target, '/Reddit/ExpandCommentBranch',
             reddit__pb2.Comment.SerializeToString,
             reddit__pb2.Comment.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Update(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reddit/Update',
+            reddit__pb2.Post.SerializeToString,
+            reddit__pb2.Post.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
