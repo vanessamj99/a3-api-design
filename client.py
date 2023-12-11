@@ -19,7 +19,7 @@ def run():
                 author= reddit_pb2.User(userID= "1"),
             )
     )
-    print("Post client received: " + response.message)
+    print("Post client received: " + str(response))
 
 if __name__ == "__main__":
     run()
