@@ -19,7 +19,19 @@ def run():
                 author= reddit_pb2.User(userID= "1"),
             )
     )
-    print("Post client received: " + str(response))
+        print("Post client received: " + str(response))
+        
+        response = stub.Retrieve(
+            reddit_pb2.Post(
+                postID= "1"
+            )
+        )
+        print("Post client received: " + str(response))
 
+        response = stub.UpVote(
+            reddit_pb2.Post(
+                postID="1"
+            )
+        )
 if __name__ == "__main__":
     run()

@@ -12,6 +12,17 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
    def CreatePost(self, request, context):
        random_number = random.randint(0,1)
        if random_number == 1:
+           new_post = reddit_pb2.Post(
+            postID= request.postID,
+            title= request.title,
+            text= request.text,
+            mediaUrl= request.mediaUrl,
+            score= request.score,
+            state= request.state,
+            publicationDate=request.publicationDate,
+            author= request.author
+           )
+           self.posts[new_post.postID] = new_post
            return reddit_pb2.Post(
             postID= request.postID,
             title= request.title,
@@ -22,7 +33,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
             publicationDate=request.publicationDate,
             author= request.author,
             post_created_message = "Post was created"
-        )
+            ) 
        else:
             return reddit_pb2.Post(
             postID= request.postID,
