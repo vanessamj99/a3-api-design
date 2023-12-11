@@ -13,6 +13,9 @@ message Post {
     string state = 6;
     string publicationDate = 7;
     User author = 8;
+    String post_created_message = 9;
+    string upVote = 6;
+    string downVote = 7;
 }
 
 message Comment {
@@ -21,6 +24,8 @@ message Comment {
     string score = 3;
     string state = 4;
     string publicationDate = 5;
+    string upVote = 6;
+    string downVote = 7;
 }
 
 service Reddit {
@@ -29,6 +34,6 @@ service Reddit {
     rpc DownVote(Post) returns (Post) {}
     rpc Retrieve(Post) returns (Post) {}
     rpc CreateComment(Comment) returns (Comment) {}
-    rpc RetrieveListOfNMostUpvotedComments(Post) returns (Comment) {}
+    rpc RetrieveListOfNMostUpvotedComments(Post,N) returns (stream Comment) {}
     rpc ExpandCommentBranch(Comment) returns (Comment) {}
 }
