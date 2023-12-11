@@ -1,6 +1,7 @@
+from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from typing import ClassVar as _ClassVar, Mapping as _Mapping, Optional as _Optional, Union as _Union
+from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Mapping, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -11,7 +12,7 @@ class User(_message.Message):
     def __init__(self, userID: _Optional[str] = ...) -> None: ...
 
 class Post(_message.Message):
-    __slots__ = ["postID", "title", "text", "mediaUrl", "score", "state", "publicationDate", "author"]
+    __slots__ = ["postID", "title", "text", "mediaUrl", "score", "state", "publicationDate", "author", "post_created_message", "upVote", "downVote", "comments"]
     POSTID_FIELD_NUMBER: _ClassVar[int]
     TITLE_FIELD_NUMBER: _ClassVar[int]
     TEXT_FIELD_NUMBER: _ClassVar[int]
@@ -20,6 +21,10 @@ class Post(_message.Message):
     STATE_FIELD_NUMBER: _ClassVar[int]
     PUBLICATIONDATE_FIELD_NUMBER: _ClassVar[int]
     AUTHOR_FIELD_NUMBER: _ClassVar[int]
+    POST_CREATED_MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    UPVOTE_FIELD_NUMBER: _ClassVar[int]
+    DOWNVOTE_FIELD_NUMBER: _ClassVar[int]
+    COMMENTS_FIELD_NUMBER: _ClassVar[int]
     postID: str
     title: str
     text: str
@@ -28,18 +33,44 @@ class Post(_message.Message):
     state: str
     publicationDate: str
     author: User
-    def __init__(self, postID: _Optional[str] = ..., title: _Optional[str] = ..., text: _Optional[str] = ..., mediaUrl: _Optional[str] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ...) -> None: ...
+    post_created_message: str
+    upVote: str
+    downVote: str
+    comments: _containers.RepeatedCompositeFieldContainer[Comment]
+    def __init__(self, postID: _Optional[str] = ..., title: _Optional[str] = ..., text: _Optional[str] = ..., mediaUrl: _Optional[str] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., post_created_message: _Optional[str] = ..., upVote: _Optional[str] = ..., downVote: _Optional[str] = ..., comments: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ...) -> None: ...
 
 class Comment(_message.Message):
-    __slots__ = ["commentID", "author", "score", "state", "publicationDate"]
+    __slots__ = ["commentID", "author", "score", "state", "publicationDate", "upVote", "downVote", "has_replies", "replies"]
     COMMENTID_FIELD_NUMBER: _ClassVar[int]
     AUTHOR_FIELD_NUMBER: _ClassVar[int]
     SCORE_FIELD_NUMBER: _ClassVar[int]
     STATE_FIELD_NUMBER: _ClassVar[int]
     PUBLICATIONDATE_FIELD_NUMBER: _ClassVar[int]
+    UPVOTE_FIELD_NUMBER: _ClassVar[int]
+    DOWNVOTE_FIELD_NUMBER: _ClassVar[int]
+    HAS_REPLIES_FIELD_NUMBER: _ClassVar[int]
+    REPLIES_FIELD_NUMBER: _ClassVar[int]
     commentID: str
     author: User
     score: str
     state: str
     publicationDate: str
-    def __init__(self, commentID: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ...) -> None: ...
+    upVote: str
+    downVote: str
+    has_replies: str
+    replies: _containers.RepeatedCompositeFieldContainer[Comment]
+    def __init__(self, commentID: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., upVote: _Optional[str] = ..., downVote: _Optional[str] = ..., has_replies: _Optional[str] = ..., replies: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ...) -> None: ...
+
+class TopN(_message.Message):
+    __slots__ = ["post", "number"]
+    POST_FIELD_NUMBER: _ClassVar[int]
+    NUMBER_FIELD_NUMBER: _ClassVar[int]
+    post: Post
+    number: int
+    def __init__(self, post: _Optional[_Union[Post, _Mapping]] = ..., number: _Optional[int] = ...) -> None: ...
+
+class Update(_message.Message):
+    __slots__ = ["id"]
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    def __init__(self, id: _Optional[str] = ...) -> None: ...
