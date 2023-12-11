@@ -13,7 +13,7 @@ message Post {
     string state = 6;
     string publicationDate = 7;
     User author = 8;
-    String post_created_message = 9;
+    string post_created_message = 9;
     string upVote = 10;
     string downVote = 11;
     repeated Comment comments = 12;
@@ -33,7 +33,7 @@ message Comment {
 
 message TopN {
     Post post = 1;
-    Int number = 2;
+    int32 number = 2;
 }
 
 //extra credit 
