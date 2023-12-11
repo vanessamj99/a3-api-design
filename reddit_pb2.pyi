@@ -40,7 +40,7 @@ class Post(_message.Message):
     def __init__(self, postID: _Optional[str] = ..., title: _Optional[str] = ..., text: _Optional[str] = ..., mediaUrl: _Optional[str] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., post_created_message: _Optional[str] = ..., upVote: _Optional[int] = ..., downVote: _Optional[int] = ..., comments: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ...) -> None: ...
 
 class Comment(_message.Message):
-    __slots__ = ["commentID", "author", "score", "state", "publicationDate", "upVote", "downVote", "has_replies", "replies"]
+    __slots__ = ["commentID", "author", "score", "state", "publicationDate", "upVote", "downVote", "has_replies", "replies", "post"]
     COMMENTID_FIELD_NUMBER: _ClassVar[int]
     AUTHOR_FIELD_NUMBER: _ClassVar[int]
     SCORE_FIELD_NUMBER: _ClassVar[int]
@@ -50,6 +50,7 @@ class Comment(_message.Message):
     DOWNVOTE_FIELD_NUMBER: _ClassVar[int]
     HAS_REPLIES_FIELD_NUMBER: _ClassVar[int]
     REPLIES_FIELD_NUMBER: _ClassVar[int]
+    POST_FIELD_NUMBER: _ClassVar[int]
     commentID: str
     author: User
     score: str
@@ -59,7 +60,8 @@ class Comment(_message.Message):
     downVote: int
     has_replies: str
     replies: _containers.RepeatedCompositeFieldContainer[Comment]
-    def __init__(self, commentID: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., upVote: _Optional[int] = ..., downVote: _Optional[int] = ..., has_replies: _Optional[str] = ..., replies: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ...) -> None: ...
+    post: Post
+    def __init__(self, commentID: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., upVote: _Optional[int] = ..., downVote: _Optional[int] = ..., has_replies: _Optional[str] = ..., replies: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ..., post: _Optional[_Union[Post, _Mapping]] = ...) -> None: ...
 
 class TopN(_message.Message):
     __slots__ = ["post", "number"]
