@@ -49,9 +49,12 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            
    def UpVote(self, request, context):
        print(type(request))
-       return super().UpVote(request, context)
+       request.upVote += 1
+       return request
    def DownVote(self, request, context):
-       return super().DownVote(request, context)
+       print(type(request))
+       request.downVote += 1
+       return request
    def Retrieve(self, request, context):
        if request.postID in self.posts.keys():
            print("Post found")

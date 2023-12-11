@@ -14,8 +14,8 @@ message Post {
     string publicationDate = 7;
     User author = 8;
     string post_created_message = 9;
-    string upVote = 10;
-    string downVote = 11;
+    int32 upVote = 10;
+    int32 downVote = 11;
     repeated Comment comments = 12;
 }
 
@@ -25,8 +25,8 @@ message Comment {
     string score = 3;
     string state = 4;
     string publicationDate = 5;
-    string upVote = 6;
-    string downVote = 7;
+    int32 upVote = 6;
+    int32 downVote = 7;
     string has_replies = 8;
     repeated Comment replies = 9;
 }
