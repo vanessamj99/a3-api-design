@@ -33,5 +33,14 @@ def run():
                 postID="1"
             )
         )
+        print("Post client received: " + str(response))
+
+        response = stub.DownVote(
+            reddit_pb2.Post(
+                postID="1"
+            )
+        )
+        print("Post client received: " + str(response))
+        
 if __name__ == "__main__":
     run()
