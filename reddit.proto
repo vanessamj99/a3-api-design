@@ -16,6 +16,7 @@ message Post {
     String post_created_message = 9;
     string upVote = 6;
     string downVote = 7;
+    repeated Comment comments = 8;
 }
 
 message Comment {
@@ -26,10 +27,18 @@ message Comment {
     string publicationDate = 5;
     string upVote = 6;
     string downVote = 7;
+    string has_replies = 8;
+    repeated Comment replies = 9;
 }
 
-message N {
-    int number = 1;
+message TopN {
+    Post post = 1;
+    int number = 2;
+}
+
+//extra credit 
+message Update {
+    string id = 1;
 }
 
 service Reddit {
@@ -38,6 +47,8 @@ service Reddit {
     rpc DownVote(Post) returns (Post) {}
     rpc Retrieve(Post) returns (Post) {}
     rpc CreateComment(Comment) returns (Comment) {}
-    rpc RetrieveListOfNMostUpvotedComments(Post,N) returns (stream Comment) {}
+    rpc RetrieveListOfNMostUpvotedComments(TopN) returns (stream Comment) {}
     rpc ExpandCommentBranch(Comment) returns (Comment) {}
+    //extra credit:
+    rpc Update(Post) returns (Post) {}
 }
