@@ -101,6 +101,25 @@ def run():
         print("Post client received: " + str(response))
 
 
+        response = stub.RetrieveListOfNMostUpvotedComments(
+            reddit_pb2.TopN(
+                post= reddit_pb2.Post(
+                    postID= "46",
+                    title= "Data Focused Python",
+                    text="Data Focused Python was a remote class at 11am on Mondays and Wednesdays",
+                    mediaUrl= "http://data-focused-python.com",
+                    score= "-50",
+                    state="Normal",
+                    publicationDate="11/08/23",
+                    author= reddit_pb2.User(
+                        userID= "66"
+                    )
+                ),
+                number = 2
+            )
+        )
+
+
         response = stub.ExpandCommentBranch(
             reddit_pb2.Comment(
                 commentID="10"

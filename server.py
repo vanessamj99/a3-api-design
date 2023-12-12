@@ -137,20 +137,19 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
         )
            
    def UpVote(self, request, context):
-       request.upVote += 1
-       self.posts[request.postID] = request
+       self.posts[request.postID] = request.upVote + 1
        return request
    def UpVoteComment(self,request,context):
-       request.upVote += 1
-       self.posts[request.commentID] = request
+    #    request.upVote += 1
+       self.posts[request.commentID] = request.upVote + 1
        return request
    def DownVoteComment(self,request,context):
-       request.downVote += 1
-       self.comments[request.commentID] = request
+    #    request.downVote += 1
+       self.comments[request.commentID] = request.downVote + 1
        return request
    def DownVote(self, request, context):
-       request.downVote += 1
-       self.comments[request.postID] = request
+    #    request.downVote += 1
+       self.comments[request.postID] = request.downVote + 1
        return request
    def Retrieve(self, request, context):
        if request.postID in self.posts.keys():
@@ -171,13 +170,13 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        print(comments)
        sorted_comments = sorted(comments.items(), key=lambda comment: comment[1].upVote, reverse=True)
        print(sorted_comments)
-       return sorted_comments[:number-1]
+       yield sorted_comments[:number-1]
    def ExpandCommentBranch(self, request, context):
        number = request.number
        comment = request.comment
        comments = comment.replies
        sorted_comments = sorted(comments.items(), key=lambda comment: comment[1].upVote, reverse=True)
-       return sorted_comments[:number-1]
+       yield sorted_comments[:number-1]
 
 
 def serve():
