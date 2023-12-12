@@ -95,7 +95,8 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            publicationDate= "04/01/23",
            postID= "28", 
        )
-            ]
+            ],
+            text = "Awesome!"
            )
            self.posts[new_post.postID] = new_post
            return reddit_pb2.Post(
@@ -119,7 +120,8 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            publicationDate= "04/01/23",
            postID= "28", 
        )
-            ]
+            ],
+            text= "Great work!"
             ) 
        else:
             return reddit_pb2.Post(
