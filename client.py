@@ -52,23 +52,36 @@ def run():
                 score= "-4",
                 state= "hidden",
                 publicationDate="12/06/23",
-                post= reddit_pb2.Post(
-                    postID= "1"
-                )
+                postID= "1"
+                
             )
         )
         print("Post client received: " + str(response))
 
         response = stub.CreateComment(
             reddit_pb2.Comment(
-                commentID= "10"
+                commentID= "10",
+                author= reddit_pb2.User(
+                    userID= "22"
+                ),
+                score= "779",
+                state= "Normal",
+                publicationDate="12/07/23",
+                postID= "89"
             )
         )
         print("Post client received: " + str(response))
 
         response = stub.CreateComment(
             reddit_pb2.Comment(
-                commentID= "46"
+                commentID= "46",
+                author= reddit_pb2.User(
+                    userID= "09"
+                ),
+                score= "40",
+                state= "Normal",
+                publicationDate="12/08/23",
+                postID= "28"
             )
         )
         print("Post client received: " + str(response))
