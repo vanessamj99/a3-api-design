@@ -31,6 +31,7 @@ message Comment {
     repeated Comment replies = 9;
     string postID = 10;
     bool was_created = 11;
+    string text = 12;
 }
 
 message TopN {
