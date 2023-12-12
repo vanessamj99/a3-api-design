@@ -168,14 +168,14 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        post = request.post
        comments = post.comments
        print(comments)
-       sorted_comments = sorted(comments.items(), key=lambda comment: comment[1].upVote, reverse=True)
+       sorted_comments = sorted(comments, key=lambda comment: comment.upVote, reverse=True)
        print(sorted_comments)
        yield sorted_comments[:number-1]
    def ExpandCommentBranch(self, request, context):
        number = request.number
        comment = request.comment
        comments = comment.replies
-       sorted_comments = sorted(comments.items(), key=lambda comment: comment[1].upVote, reverse=True)
+       sorted_comments = sorted(comments, key=lambda comment: comment.upVote, reverse=True)
        yield sorted_comments[:number-1]
 
 
