@@ -153,7 +153,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        return request
    def Retrieve(self, request, context):
        if request.postID in self.posts.keys():
-           print("Post found")
+           #print("Post found")
            return self.posts[request.postID]
        else:
            return reddit_pb2.Post(

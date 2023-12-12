@@ -118,14 +118,14 @@ def run():
                 number = 2
             )
         )
-
+        print("Post client received: " + str(response.result()))
 
         response = stub.ExpandCommentBranch(
             reddit_pb2.Comment(
                 commentID="10"
             )
         )
-        print("Post client received: " + str(response))
+        print("Post client received: " + str(response.result()))
 
 if __name__ == "__main__":
     run()
