@@ -52,7 +52,7 @@ service Reddit {
     rpc Retrieve(Post) returns (Post) {}
     rpc CreateComment(Comment) returns (Comment) {}
     rpc RetrieveListOfNMostUpvotedComments(TopN) returns (stream Comment) {}
-    rpc ExpandCommentBranch(TopNComment) returns (stream Comment) {}
+    rpc ExpandCommentBranch(TopNComments) returns (stream Comment) {}
     //extra credit:
     rpc Update(Post) returns (Post) {}
 }
