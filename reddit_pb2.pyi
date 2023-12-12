@@ -40,7 +40,7 @@ class Post(_message.Message):
     def __init__(self, postID: _Optional[str] = ..., title: _Optional[str] = ..., text: _Optional[str] = ..., mediaUrl: _Optional[str] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., post_created_message: _Optional[str] = ..., upVote: _Optional[int] = ..., downVote: _Optional[int] = ..., comments: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ...) -> None: ...
 
 class Comment(_message.Message):
-    __slots__ = ["commentID", "author", "score", "state", "publicationDate", "upVote", "downVote", "has_replies", "replies", "post"]
+    __slots__ = ["commentID", "author", "score", "state", "publicationDate", "upVote", "downVote", "has_replies", "replies", "postID", "was_created", "text"]
     COMMENTID_FIELD_NUMBER: _ClassVar[int]
     AUTHOR_FIELD_NUMBER: _ClassVar[int]
     SCORE_FIELD_NUMBER: _ClassVar[int]
@@ -50,7 +50,9 @@ class Comment(_message.Message):
     DOWNVOTE_FIELD_NUMBER: _ClassVar[int]
     HAS_REPLIES_FIELD_NUMBER: _ClassVar[int]
     REPLIES_FIELD_NUMBER: _ClassVar[int]
-    POST_FIELD_NUMBER: _ClassVar[int]
+    POSTID_FIELD_NUMBER: _ClassVar[int]
+    WAS_CREATED_FIELD_NUMBER: _ClassVar[int]
+    TEXT_FIELD_NUMBER: _ClassVar[int]
     commentID: str
     author: User
     score: str
@@ -60,16 +62,26 @@ class Comment(_message.Message):
     downVote: int
     has_replies: str
     replies: _containers.RepeatedCompositeFieldContainer[Comment]
-    post: Post
-    def __init__(self, commentID: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., upVote: _Optional[int] = ..., downVote: _Optional[int] = ..., has_replies: _Optional[str] = ..., replies: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ..., post: _Optional[_Union[Post, _Mapping]] = ...) -> None: ...
+    postID: str
+    was_created: bool
+    text: str
+    def __init__(self, commentID: _Optional[str] = ..., author: _Optional[_Union[User, _Mapping]] = ..., score: _Optional[str] = ..., state: _Optional[str] = ..., publicationDate: _Optional[str] = ..., upVote: _Optional[int] = ..., downVote: _Optional[int] = ..., has_replies: _Optional[str] = ..., replies: _Optional[_Iterable[_Union[Comment, _Mapping]]] = ..., postID: _Optional[str] = ..., was_created: bool = ..., text: _Optional[str] = ...) -> None: ...
 
 class TopN(_message.Message):
-    __slots__ = ["post", "number"]
-    POST_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ["postID", "number"]
+    POSTID_FIELD_NUMBER: _ClassVar[int]
     NUMBER_FIELD_NUMBER: _ClassVar[int]
-    post: Post
+    postID: str
     number: int
-    def __init__(self, post: _Optional[_Union[Post, _Mapping]] = ..., number: _Optional[int] = ...) -> None: ...
+    def __init__(self, postID: _Optional[str] = ..., number: _Optional[int] = ...) -> None: ...
+
+class TopNComments(_message.Message):
+    __slots__ = ["commentID", "number"]
+    COMMENTID_FIELD_NUMBER: _ClassVar[int]
+    NUMBER_FIELD_NUMBER: _ClassVar[int]
+    commentID: str
+    number: int
+    def __init__(self, commentID: _Optional[str] = ..., number: _Optional[int] = ...) -> None: ...
 
 class Update(_message.Message):
     __slots__ = ["id"]

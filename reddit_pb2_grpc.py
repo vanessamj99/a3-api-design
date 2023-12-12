@@ -29,6 +29,16 @@ class RedditStub(object):
                 request_serializer=reddit__pb2.Post.SerializeToString,
                 response_deserializer=reddit__pb2.Post.FromString,
                 )
+        self.UpVoteComment = channel.unary_unary(
+                '/Reddit/UpVoteComment',
+                request_serializer=reddit__pb2.Comment.SerializeToString,
+                response_deserializer=reddit__pb2.Comment.FromString,
+                )
+        self.DownVoteComment = channel.unary_unary(
+                '/Reddit/DownVoteComment',
+                request_serializer=reddit__pb2.Comment.SerializeToString,
+                response_deserializer=reddit__pb2.Comment.FromString,
+                )
         self.Retrieve = channel.unary_unary(
                 '/Reddit/Retrieve',
                 request_serializer=reddit__pb2.Post.SerializeToString,
@@ -44,9 +54,9 @@ class RedditStub(object):
                 request_serializer=reddit__pb2.TopN.SerializeToString,
                 response_deserializer=reddit__pb2.Comment.FromString,
                 )
-        self.ExpandCommentBranch = channel.unary_unary(
+        self.ExpandCommentBranch = channel.unary_stream(
                 '/Reddit/ExpandCommentBranch',
-                request_serializer=reddit__pb2.Comment.SerializeToString,
+                request_serializer=reddit__pb2.TopNComments.SerializeToString,
                 response_deserializer=reddit__pb2.Comment.FromString,
                 )
         self.Update = channel.unary_unary(
@@ -72,6 +82,18 @@ class RedditServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DownVote(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpVoteComment(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DownVoteComment(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -126,6 +148,16 @@ def add_RedditServicer_to_server(servicer, server):
                     request_deserializer=reddit__pb2.Post.FromString,
                     response_serializer=reddit__pb2.Post.SerializeToString,
             ),
+            'UpVoteComment': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpVoteComment,
+                    request_deserializer=reddit__pb2.Comment.FromString,
+                    response_serializer=reddit__pb2.Comment.SerializeToString,
+            ),
+            'DownVoteComment': grpc.unary_unary_rpc_method_handler(
+                    servicer.DownVoteComment,
+                    request_deserializer=reddit__pb2.Comment.FromString,
+                    response_serializer=reddit__pb2.Comment.SerializeToString,
+            ),
             'Retrieve': grpc.unary_unary_rpc_method_handler(
                     servicer.Retrieve,
                     request_deserializer=reddit__pb2.Post.FromString,
@@ -141,9 +173,9 @@ def add_RedditServicer_to_server(servicer, server):
                     request_deserializer=reddit__pb2.TopN.FromString,
                     response_serializer=reddit__pb2.Comment.SerializeToString,
             ),
-            'ExpandCommentBranch': grpc.unary_unary_rpc_method_handler(
+            'ExpandCommentBranch': grpc.unary_stream_rpc_method_handler(
                     servicer.ExpandCommentBranch,
-                    request_deserializer=reddit__pb2.Comment.FromString,
+                    request_deserializer=reddit__pb2.TopNComments.FromString,
                     response_serializer=reddit__pb2.Comment.SerializeToString,
             ),
             'Update': grpc.unary_unary_rpc_method_handler(
@@ -213,6 +245,40 @@ class Reddit(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def UpVoteComment(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reddit/UpVoteComment',
+            reddit__pb2.Comment.SerializeToString,
+            reddit__pb2.Comment.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DownVoteComment(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Reddit/DownVoteComment',
+            reddit__pb2.Comment.SerializeToString,
+            reddit__pb2.Comment.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def Retrieve(request,
             target,
             options=(),
@@ -274,8 +340,8 @@ class Reddit(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Reddit/ExpandCommentBranch',
-            reddit__pb2.Comment.SerializeToString,
+        return grpc.experimental.unary_stream(request, target, '/Reddit/ExpandCommentBranch',
+            reddit__pb2.TopNComments.SerializeToString,
             reddit__pb2.Comment.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
