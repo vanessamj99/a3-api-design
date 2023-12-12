@@ -103,7 +103,7 @@ def run():
 
         response = stub.RetrieveListOfNMostUpvotedComments(
             reddit_pb2.TopN(
-                postID= "1",
+                postID= "28",
                 number = 2
             )
         )

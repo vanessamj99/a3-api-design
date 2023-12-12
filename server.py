@@ -8,7 +8,13 @@ import random
 class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
    def __init__(self) -> None:
        self.posts = {"103": reddit_pb2.Post(
-           
+           postID= "2",
+           title= "First Post Ever",
+           text="Genesis of Posts",
+           mediaUrl= "http://beginning.com",
+           score= "10000",
+           state="Normal",
+           publicationDate="10/08/21",
        ),
        "28": reddit_pb2.Post(
            postID= "28",
