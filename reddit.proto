@@ -35,12 +35,12 @@ message Comment {
 }
 
 message TopN {
-    Post post = 1;
+    string postID = 1;
     int32 number = 2;
 }
 
 message TopNComments{
-    Comment comment = 1;
+    string commentID = 1;
     int32 number = 2;
 }
 

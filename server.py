@@ -165,6 +165,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        return request
    def RetrieveListOfNMostUpvotedComments(self, request, context):
        print(request, "in retrievelist")
+       print(self.posts[request.postID])
        number = request.number
        post = request.post
        comments = post.comments
@@ -176,6 +177,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        yield sorted_comments[:number-1]
    def ExpandCommentBranch(self, request, context):
        print(request, "in expand comment")
+       print(self.comments[request.commentID], "comment in dict")
        number = request.number
        comment = request.comment
        comments = comment.replies
