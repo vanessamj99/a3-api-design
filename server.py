@@ -186,8 +186,8 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        if len(self.posts[request.postID].comments) == 0:
            return []
        sorted_comments = sorted(self.posts[request.postID].comments, key=lambda comment: comment.upVote, reverse=True)
-       print(sorted_comments)
-       return sorted_comments[:request.number]
+       for comment in sorted_comments:
+           yield comment
    def ExpandCommentBranch(self, request, context):
        print(request, "in expand comment")
        print(self.comments[request.commentID], "comment in dict")
