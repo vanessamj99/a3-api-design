@@ -104,7 +104,7 @@ def run():
         response = stub.RetrieveListOfNMostUpvotedComments(
             reddit_pb2.TopN(
                 postID= "2",
-                number = 2
+                number = 1
             )
         )
         print("Post client received: " + str(response.result()))

@@ -183,17 +183,11 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        self.comments[request.commentID] = request
        return request
    def RetrieveListOfNMostUpvotedComments(self, request, context):
-       print(request, "in retrievelist")
-       print(self.posts[request.postID], " here")
-       number = request.number
-       post = request.post
-       comments = post.comments
-       print(comments)
-       if len(comments) == 0:
+       if len(self.posts[request.postID].comments) == 0:
            return []
-       sorted_comments = sorted(comments, key=lambda comment: comment.upVote, reverse=True)
+       sorted_comments = sorted(self.posts[request.postID].comments, key=lambda comment: comment.upVote, reverse=True)
        print(sorted_comments)
-       yield sorted_comments[:number-1]
+       return sorted_comments[:request.number]
    def ExpandCommentBranch(self, request, context):
        print(request, "in expand comment")
        print(self.comments[request.commentID], "comment in dict")
