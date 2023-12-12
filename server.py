@@ -236,7 +236,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            yield comment
    def ExpandCommentBranch(self, request, context):
        print(self.comments[request.commentID])
-       print()
+       print(request.commentID)
        print(self.comments[request.commentID].replies)
        if len(self.comments[request.commentID].replies) == 0:
            return []
