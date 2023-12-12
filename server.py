@@ -7,7 +7,7 @@ import random
 
 class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
    def __init__(self) -> None:
-       self.posts = {"103": reddit_pb2.Post(
+       self.posts = {"2": reddit_pb2.Post(
            postID= "2",
            title= "First Post Ever",
            text="Genesis of Posts",
