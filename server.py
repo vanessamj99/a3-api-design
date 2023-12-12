@@ -68,8 +68,18 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            author= reddit_pb2.User(
                userID= "32"
            ),
-           postID= "89",
-           replies= [
+           postID= "89"
+       ),
+       "10": reddit_pb2.Comment(
+           commentID= "10",
+           author= reddit_pb2.User(
+               userID= "23"
+           ),
+           score= "11",
+           state= "Normal",
+           publicationDate= "04/01/23",
+           postID= "28", 
+            replies= [
             reddit_pb2.Comment(
            commentID= "12",
            author= reddit_pb2.User(
@@ -115,16 +125,6 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            upVote= 9
        )
            ]
-       ),
-       "10": reddit_pb2.Comment(
-           commentID= "10",
-           author= reddit_pb2.User(
-               userID= "23"
-           ),
-           score= "11",
-           state= "Normal",
-           publicationDate= "04/01/23",
-           postID= "28", 
        ),
        "76": reddit_pb2.Comment(
            commentID= "76",

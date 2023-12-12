@@ -113,7 +113,7 @@ def run():
 
         response = stub.ExpandCommentBranch(
             reddit_pb2.TopNComments(
-                commentID = "46",
+                commentID = "10",
                 number = 2
             )
         )
