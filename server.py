@@ -69,7 +69,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
                userID= "32"
            ),
            postID= "89",
-            replies= [
+           replies= [
             reddit_pb2.Comment(
            commentID= "12",
            author= reddit_pb2.User(
@@ -237,7 +237,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
    def ExpandCommentBranch(self, request, context):
        print(self.comments[request.commentID])
        print()
-       print(self.comments)
+       print(self.comments[request.commentID].replies)
        if len(self.comments[request.commentID].replies) == 0:
            return []
        sorted_comments = sorted(self.comments[request.commentID].replies, key=lambda comment: comment.upVote, reverse=True)
