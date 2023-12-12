@@ -164,6 +164,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        self.comments[request.commentID] = request
        return request
    def RetrieveListOfNMostUpvotedComments(self, request, context):
+       print(request, "in retrievelist")
        number = request.number
        post = request.post
        comments = post.comments
@@ -174,9 +175,13 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        print(sorted_comments)
        yield sorted_comments[:number-1]
    def ExpandCommentBranch(self, request, context):
+       print(request, "in expand comment")
        number = request.number
        comment = request.comment
        comments = comment.replies
+       print(comments)
+       if len(comments) == 0:
+           return []
        sorted_comments = sorted(comments, key=lambda comment: comment.upVote, reverse=True)
        yield sorted_comments[:number-1]
 
