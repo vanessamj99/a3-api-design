@@ -235,6 +235,9 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        for comment in sorted_comments:
            yield comment
    def ExpandCommentBranch(self, request, context):
+       print(self.comments[request.commentID])
+       print()
+       print(self.comments)
        if len(self.comments[request.commentID].replies) == 0:
            return []
        sorted_comments = sorted(self.comments[request.commentID].replies, key=lambda comment: comment.upVote, reverse=True)
