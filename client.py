@@ -38,7 +38,7 @@ def run():
 
         response = stub.Retrieve(
             reddit_pb2.Post(
-                postID= "1"
+                postID= "28"
             )
         )
         print("Post client received: " + str(response))

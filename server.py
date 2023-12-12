@@ -85,7 +85,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
             publicationDate=request.publicationDate,
             author= request.author,
             comments= [
-        reddit_pb2.Comment(
+         reddit_pb2.Comment(
            commentID= "10",
            author= reddit_pb2.User(
                userID= "23"
@@ -94,7 +94,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            state= "Normal",
            publicationDate= "04/01/23",
            postID= "28", 
-           text = "Awesome!"
+           text= "Great work!"
        )
             ],
            )
