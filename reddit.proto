@@ -28,7 +28,20 @@ message Comment {
     int32 upVote = 6;
     int32 downVote = 7;
     string has_replies = 8;
-    repeated Comment replies = 9;
+    repeated NestedComment replies = 9;
+    string postID = 10;
+    bool was_created = 11;
+    string text = 12;
+}
+
+message NestedComment {
+    string commentID = 1;
+    User author = 2;
+    string score = 3;
+    string state = 4;
+    string publicationDate = 5;
+    int32 upVote = 6;
+    int32 downVote = 7;
     string postID = 10;
     bool was_created = 11;
     string text = 12;

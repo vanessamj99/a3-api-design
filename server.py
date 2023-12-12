@@ -80,18 +80,18 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            publicationDate= "04/01/23",
            postID= "28", 
             replies= [
-            reddit_pb2.Comment(
+            reddit_pb2.NestedComment(
            commentID= "12",
            author= reddit_pb2.User(
                userID= "23"
            ),
-           score= "11",
+           score= "1009",
            state= "Normal",
-           publicationDate= "04/01/23",
-           postID= "28", 
+           publicationDate= "04/04/23",
+           postID= "1827", 
            upVote= 20
        ),
-        reddit_pb2.Comment(
+        reddit_pb2.NestedComment(
            commentID= "1010",
            author= reddit_pb2.User(
                userID= "22"
@@ -102,7 +102,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            postID= "709", 
            upVote= 3
        ),
-        reddit_pb2.Comment(
+        reddit_pb2.NestedComment(
            commentID= "124",
            author= reddit_pb2.User(
                userID= "22"
@@ -113,7 +113,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            postID= "18", 
            upVote= 1
        ),
-        reddit_pb2.Comment(
+        reddit_pb2.NestedComment(
            commentID= "910",
            author= reddit_pb2.User(
                userID= "05"
