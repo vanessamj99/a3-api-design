@@ -165,7 +165,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        return request
    def RetrieveListOfNMostUpvotedComments(self, request, context):
        print(request, "in retrievelist")
-       print(self.posts[request.postID])
+       print(self.posts[request.postID], " here")
        number = request.number
        post = request.post
        comments = post.comments
