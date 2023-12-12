@@ -142,7 +142,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        return request
    def UpVoteComment(self,request,context):
        request.upVote += 1
-       self.posts[request.postID] = request
+       self.posts[request.commentID] = request
        return request
    def DownVoteComment(self,request,context):
        request.downVote += 1
@@ -150,7 +150,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        return request
    def DownVote(self, request, context):
        request.downVote += 1
-       self.comments[request.commentID] = request
+       self.comments[request.postID] = request
        return request
    def Retrieve(self, request, context):
        if request.postID in self.posts.keys():
