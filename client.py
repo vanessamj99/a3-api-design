@@ -104,7 +104,7 @@ def run():
         response = stub.RetrieveListOfNMostUpvotedComments(
             reddit_pb2.TopN(
                 post= reddit_pb2.Post(
-                    postID= "46",
+                    postID= "1",
                     title= "Data Focused Python",
                     text="Data Focused Python was a remote class at 11am on Mondays and Wednesdays",
                     mediaUrl= "http://data-focused-python.com",

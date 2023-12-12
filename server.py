@@ -168,6 +168,8 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        post = request.post
        comments = post.comments
        print(comments)
+       if len(comments) == 0:
+           return []
        sorted_comments = sorted(comments, key=lambda comment: comment.upVote, reverse=True)
        print(sorted_comments)
        yield sorted_comments[:number-1]
