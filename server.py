@@ -15,6 +15,19 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            score= "10000",
            state="Normal",
            publicationDate="10/08/21",
+           comments= [
+         reddit_pb2.Comment(
+           commentID= "10",
+           author= reddit_pb2.User(
+               userID= "23"
+           ),
+           score= "110",
+           state= "Normal",
+           publicationDate= "04/01/23",
+           postID= "77", 
+           text= "Awesome!!!"
+       )
+            ],
        ),
        "28": reddit_pb2.Post(
            postID= "28",
