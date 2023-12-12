@@ -107,14 +107,18 @@ def run():
                 number = 1
             )
         )
-        print("Post client received: " + str(response.result()))
+        print("Post client received the following: ")
+        for comment in response:
+            print(comment)
 
         response = stub.ExpandCommentBranch(
             reddit_pb2.Comment(
                 commentID="46"
             )
         )
-        print("Post client received: " + str(response.result()))
+        print("Post client received the following: ")
+        for comment in response:
+            print(comment)
 
 if __name__ == "__main__":
     run()
