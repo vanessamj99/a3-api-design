@@ -68,10 +68,56 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            author= reddit_pb2.User(
                userID= "32"
            ),
-           postID= "89"
+           postID= "89",
+            replies= [
+            reddit_pb2.Comment(
+           commentID= "12",
+           author= reddit_pb2.User(
+               userID= "23"
+           ),
+           score= "11",
+           state= "Normal",
+           publicationDate= "04/01/23",
+           postID= "28", 
+           upVote= 20
+       ),
+        reddit_pb2.Comment(
+           commentID= "1010",
+           author= reddit_pb2.User(
+               userID= "22"
+           ),
+           score= "198",
+           state= "Hidden",
+           publicationDate= "04/01/23",
+           postID= "709", 
+           upVote= 3
+       ),
+        reddit_pb2.Comment(
+           commentID= "124",
+           author= reddit_pb2.User(
+               userID= "22"
+           ),
+           score= "132",
+           state= "Normal",
+           publicationDate= "05/06/23",
+           postID= "18", 
+           upVote= 1
+       ),
+        reddit_pb2.Comment(
+           commentID= "910",
+           author= reddit_pb2.User(
+               userID= "05"
+           ),
+           score= "121",
+           state= "Normal",
+           publicationDate= "01/03/23",
+           postID= "67", 
+           upVote= 9
+       )
+           ]
        ),
        "10": reddit_pb2.Comment(
-           commentID= "12",
+           commentID= "10",
            author= reddit_pb2.User(
                userID= "23"
            ),
@@ -81,7 +127,7 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
            postID= "28", 
        ),
        "76": reddit_pb2.Comment(
-           commentID= "10",
+           commentID= "76",
            author= reddit_pb2.User(
                userID= "99"
            ),
@@ -189,16 +235,11 @@ class RedditOverAllService(reddit_pb2_grpc.RedditServicer):
        for comment in sorted_comments:
            yield comment
    def ExpandCommentBranch(self, request, context):
-       print(request, "in expand comment")
-       print(self.comments[request.commentID], "comment in dict")
-       number = request.number
-       comment = request.comment
-       comments = comment.replies
-       print(comments)
-       if len(comments) == 0:
+       if len(self.comments[request.commentID].replies) == 0:
            return []
-       sorted_comments = sorted(comments, key=lambda comment: comment.upVote, reverse=True)
-       yield sorted_comments[:number-1]
+       sorted_comments = sorted(self.comments[request.commentID].replies, key=lambda comment: comment.upVote, reverse=True)
+       for comment in sorted_comments:
+           yield comment
 
 
 def serve():

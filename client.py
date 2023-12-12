@@ -112,8 +112,9 @@ def run():
             print(comment)
 
         response = stub.ExpandCommentBranch(
-            reddit_pb2.Comment(
-                commentID="46"
+            reddit_pb2.TopNComments(
+                commentID = "46",
+                number = 2
             )
         )
         print("Post client received the following: ")
